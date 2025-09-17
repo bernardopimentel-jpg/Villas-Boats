@@ -1,55 +1,117 @@
-<!DOCTYPE html>
-<html lang="pt">
+<!doctype html>
+<html lang="pt-PT">
 <head>
-  <meta charset="UTF-8">
-  <title>Villas Boats - Site em Construção</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VILLAS BOATS — Site em Construção</title>
+  <meta name="description" content="VILLAS BOATS — Luxo, segurança e inspiração no mar. Site em construção." />
+  <script>
+    // Redirecionamento forçado para https://villasboats.com (sem www)
+    (function(){
+      var host = window.location.hostname;
+      if (host.startsWith('www.')) {
+        host = host.replace('www.', '');
+      }
+      var expected = 'villasboats.com';
+      if (host !== expected) {
+        window.location.replace('https://' + expected + window.location.pathname + window.location.search + window.location.hash);
+      } else if (window.location.protocol !== 'https:') {
+        window.location.replace('https://' + expected + window.location.pathname + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #fff;
-      font-family: 'Georgia', serif;
+    :root{
+      --bg:#0b1220;
+      --fg:#e8eef7;
+      --muted:#a8b3c7;
+      --brand:#1fa855;
+      --brand-dark:#128c4a;
+      --glass:rgba(12,18,32,.55);
     }
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 0;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+      color:var(--fg); background: var(--bg);
+      display:flex; align-items:center; justify-content:center;
+      background-image: radial-gradient(1200px 600px at 70% 10%, rgba(74,118,255,.18), transparent 60%),
+                        radial-gradient(800px 400px at 10% 90%, rgba(31,168,85,.12), transparent 60%),
+                        linear-gradient(180deg, #0b1220, #0b1220);
     }
-    .content {
-      position: relative;
-      z-index: 1;
+    .hero{
+      position:relative; width:min(1200px, 92vw); height:min(75vh, 860px);
+      border-radius:28px; overflow:hidden; box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      background:#0d1526;
+      isolation:isolate;
     }
-    h1 {
-      font-size: 3em;
-      color: gold;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
-      margin-bottom: 20px;
+    .hero::before{
+      content:""; position:absolute; inset:0; z-index:-1;
+      background-image:url("https://cdn.openai.com/chatgpt/villasboats/mega-yacht-hyperrealistic.jpg");
+      background-size:cover; background-position:center; filter:contrast(1.05) saturate(1.08) brightness(.78);
+      transform:scale(1.02);
     }
-    h2 {
-      font-size: 1.8em;
-      color: #eee;
-      margin: 10px 0;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+    .overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(1,7,20,.35), rgba(1,7,20,.75)); }
+    .content{
+      position:relative; height:100%; display:grid; place-items:center; text-align:center; padding:clamp(16px, 4vw, 48px);
     }
+    .title{
+      letter-spacing:.12em; text-transform:uppercase; font-weight:800; font-size: clamp(28px, 4.8vw, 72px);
+      margin: 0 0 .2em; text-shadow: 0 2px 16px rgba(0,0,0,.45);
+    }
+    .subtitle{ font-size: clamp(14px, 1.6vw, 22px); color:var(--muted); margin:0 0 1.2em; }
+    .chip{
+      display:inline-block; padding:10px 14px; border-radius:999px; background:var(--glass);
+      border:1px solid rgba(255,255,255,.12); backdrop-filter: blur(8px); font-size:14px; color:#dfe7f5;
+    }
+    .cta{
+      display:inline-flex; align-items:center; gap:12px; text-decoration:none; color:white; font-weight:700;
+      background:var(--brand); padding:14px 18px; border-radius:999px; box-shadow: 0 10px 26px rgba(18,140,74,.35);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease; margin-top:22px;
+    }
+    .cta:hover{ transform:translateY(-1px); box-shadow:0 14px 34px rgba(18,140,74,.42); background:var(--brand-dark); }
+    .cta .label{ font-size: clamp(14px, 1.4vw, 18px); letter-spacing:.02em; }
+    .cta .hint{ font-weight:500; opacity:.85; font-size:12px; }
+    .footer{ position:absolute; inset-inline:18px; bottom:18px; display:flex; justify-content:center; }
+    .footer small{ color: #c9d3e6; opacity:.85; backdrop-filter: blur(6px); background:rgba(9,14,26,.35); padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.08) }
+    .fab{
+      position:fixed; right:18px; bottom:18px; width:58px; height:58px; border-radius:50%; display:grid; place-items:center;
+      background:var(--brand); color:white; box-shadow:0 16px 36px rgba(18,140,74,.45); z-index:50;
+      transition:transform .18s ease, box-shadow .18s ease; text-decoration:none;
+    }
+    .fab:hover{ transform:translateY(-2px); box-shadow:0 22px 42px rgba(18,140,74,.55) }
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0 }
+    .wa{ width:22px; height:22px; display:block }
+    @media (max-width: 520px){ .footer{display:none} }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="content">
-    <h1>Villas Boats</h1>
-    <h2>Site em Construção</h2>
-    <h2>Novidades em Breve</h2>
-  </div>
+  <main class="hero" role="main">
+    <div class="overlay" aria-hidden="true"></div>
+    <section class="content">
+      <div>
+        <div class="chip">Luxo • Segurança • Inspiração</div>
+        <h1 class="title">VILLAS BOATS</h1>
+        <p class="subtitle">Site em Construção — A preparar um marketplace premium de aluguer de barcos em Portugal e Brasil.</p>
+
+        <a class="cta" target="_blank" rel="noopener" id="whatsapp-link"
+           href="https://wa.me/351915500020?text=Ol%C3%A1%20Villas%20Boats%2C%20quero%20informa%C3%A7%C3%B5es%20sobre%20aluguer%20de%20barcos.%20Obrigado!">
+          <svg class="wa" viewBox="0 0 32 32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M19.11 17.05c-.26-.13-1.54-.76-1.78-.84-.24-.09-.42-.13-.6.13-.18.26-.69.84-.85 1.01-.16.18-.31.2-.58.07-.26-.13-1.12-.41-2.13-1.31-.79-.7-1.32-1.57-1.48-1.83-.16-.26-.02-.4.12-.53.12-.12.26-.31.39-.46.13-.16.17-.26.26-.44.09-.18.04-.33-.02-.46-.07-.13-.6-1.44-.82-1.97-.22-.53-.44-.46-.6-.46h-.52c-.18 0-.46.07-.7.33-.24.26-.91.89-.91 2.18s.94 2.53 1.07 2.71c.13.18 1.86 2.84 4.52 3.98.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.07 1.54-.63 1.76-1.23.22-.6.22-1.12.15-1.23-.07-.11-.24-.18-.5-.31m-3.1 6.27h-.01c-1.82 0-3.61-.49-5.17-1.43l-.37-.22-3.84 1 1.03-3.75-.24-.39a9.58 9.58 0 0 1-1.46-5.08c.01-5.31 4.34-9.62 9.66-9.62 2.58 0 5 1 6.82 2.82a9.58 9.58 0 0 1 2.82 6.82c-.01 5.31-4.33 9.63-9.64 9.65m8.27-17.92A11.61 11.61 0 0 0 16 3.78C9.35 3.78 3.94 9.18 3.93 15.82c0 2 .53 3.95 1.54 5.65L3 28.22l6.93-1.82a12.06 12.06 0 0 0 6.06 1.61h.01c6.64 0 12.05-5.41 12.07-12.06 0-3.22-1.26-6.25-3.55-8.53"/></svg>
+          <span class="label">Falar no WhatsApp</span>
+          <span class="hint">Resposta rápida • 7/7</span>
+        </a>
+      </div>
+      <div class="footer"><small>© <span id="year"></span> VILLAS BOATS. Todos os direitos reservados.</small></div>
+    </section>
+  </main>
+
+  <a class="fab" target="_blank" rel="noopener" aria-label="Abrir conversa de WhatsApp" id="fab-link"
+     href="https://wa.me/351915500020?text=Ol%C3%A1%20Villas%20Boats%2C%20quero%20informa%C3%A7%C3%B5es%20sobre%20aluguer%20de%20barcos.%20Obrigado!">
+    <svg class="wa" viewBox="0 0 32 32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M19.11 17.05c-.26-.13-1.54-.76-1.78-.84-.24-.09-.42-.13-.6.13-.18.26-.69.84-.85 1.01-.16.18-.31.2-.58.07-.26-.13-1.12-.41-2.13-1.31-.79-.7-1.32-1.57-1.48-1.83-.16-.26-.02-.4.12-.53.12-.12.26-.31.39-.46.13-.16.17-.26.26-.44.09-.18.04-.33-.02-.46-.07-.13-.6-1.44-.82-1.97-.22-.53-.44-.46-.6-.46h-.52c-.18 0-.46.07-.7.33-.24.26-.91.89-.91 2.18s.94 2.53 1.07 2.71c.13.18 1.86 2.84 4.52 3.98.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.07 1.54-.63 1.76-1.23.22-.6.22-1.12.15-1.23-.07-.11-.24-.18-.5-.31m-3.1 6.27h-.01c-1.82 0-3.61-.49-5.17-1.43l-.37-.22-3.84 1 1.03-3.75-.24-.39a9.58 9.58 0 0 1-1.46-5.08c.01-5.31 4.34-9.62 9.66-9.62 2.58 0 5 1 6.82 2.82a9.58 9.58 0 0 1 2.82 6.82c-.01 5.31-4.33 9.63-9.64 9.65m8.27-17.92A11.61 11.61 0 0 0 16 3.78C9.35 3.78 3.94 9.18 3.93 15.82c0 2 .53 3.95 1.54 5.65L3 28.22l6.93-1.82a12.06 12.06 0 0 0 6.06 1.61h.01c6.64 0 12.05-5.41 12.07-12.06 0-3.22-1.26-6.25-3.55-8.53"/></svg>
+  </a>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
